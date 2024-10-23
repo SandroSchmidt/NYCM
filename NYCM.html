@@ -219,13 +219,6 @@ waypoints =[
 ]
 
 
-  colorScale ={ mara: d3.scaleLinear()
-            .domain([0, 75,150])  // Input domain
-            .range([ "green","yellow","red"]),
-          
-
-
-  }
  const mengeScale = d3.scaleLinear()
             .domain([0, 100])  // Input domain
             .range([ 3,10]); 
@@ -319,7 +312,11 @@ play = false
                                         
                                         let kk = Math.max(0,timr-delay[key]) 
                                         kkk =kk
-                             
+                                        mx =d3.max(woist[key][kk].slice(1))
+                                        console.log(mx)
+  colorScale =d3.scaleLinear()
+            .domain([0, mx/2,mx])  // Input domain
+            .range([ "green","yellow","red"])
                                         if (kk<woist[key].length){
                                     for(i=0;i<coordinates[key].length-1;i++){
                                        
@@ -330,7 +327,7 @@ play = false
                             stroke = Math.min(10,mengeScale(menge))
                             rad = Math.min(10, mengeScale(menge))
                             if (menge < 1){stroke=0;rad = 0;strokec=0}
-                            col = colorScale[key](menge)
+                            col = colorScale(menge)
                             
                             if(timr<delay[key] || timr>cutoff[key]+delay[key]){stroke=0;strokec=0,rad=0}
                            
