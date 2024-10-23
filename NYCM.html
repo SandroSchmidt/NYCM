@@ -6,7 +6,7 @@
 
 <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
-<title>BACM-24</title>
+<title>NYCM-24</title>
 
 </head>
 <style>
@@ -77,14 +77,14 @@ realtime = false
     if(play == false)
   {  tim = Math.round(this.value) ; zeitgewahlt(Math.round(tim) )}"
 
-             value=420 min=360 max=1095 step=1/>
+             value=420 min=540 max=1200 step=1/>
             
              <table class="center">
                 <tr>
 
 
                     <td>time: </td>
-                    <td><span id="uhr">07:00</span></td>
+                    <td><span id="uhr">09:00</span></td>
                 <td></td>
                     <td>guntime:</td>
                     <td><span id="gunuhr">00:00</span></td>
@@ -184,14 +184,14 @@ truecenter = coordinates.mara[Math.round(coordinates.mara.length/2)]
 waypoints =[
   //9, 15, 20, 25, 30, 36
 
-
+/*
   {name:"Aidstation 1", coordinates:coordinates.mara[Math.round((1.6*conv)/25)],icon:'url(./water.png)'},
   {name:"Aidstation 2", coordinates:coordinates.mara[Math.round((3.25*conv)/25)],icon:'url(./water.png)'},
   {name:"Aidstation 3", coordinates:coordinates.mara[Math.round((5.05*conv)/25)],icon:'url(./water.png)'},
   {name:"Aidstation 4", coordinates:coordinates.mara[Math.round((5.75*conv)/25)],icon:'url(./water.png)'},
   {name:"Aidstation 5", coordinates:coordinates.mara[Math.round((7.3*conv)/25)],icon:'url(./water.png)'},
   {name:"Aidstation 6", coordinates:coordinates.mara[Math.round((8.8*conv)/25)],icon:'url(./water.png)'},
-
+*/
 {    name:"Finish", coordinates:  coordinates.mara[coordinates.mara.length-1],icon:'url(./finish.png)'},
 {    name:"Start", coordinates: coordinates.mara[0],icon:'url(./start.png)'},
 {    name:"42 elite", coordinates:[0,0],icon:'url(./42.png)'},
@@ -200,7 +200,7 @@ waypoints =[
 
 
 
-
+/*
 {name:"Aidstation 7", coordinates:coordinates.mara[Math.round((10.1*conv)/25)],icon:'url(./water.png)'},
   {name:"Aidstation 8", coordinates:coordinates.mara[Math.round((11.5*conv)/25)],icon:'url(./water.png)'},
   {name:"Aidstation 9", coordinates:coordinates.mara[Math.round((12.6*conv)/25)],icon:'url(./water.png)'},
@@ -215,31 +215,14 @@ waypoints =[
   {name:"Aidstation 18", coordinates:coordinates.mara[Math.round((23.04*conv)/25)],icon:'url(./water.png)'},
   {name:"Aidstation 19", coordinates:coordinates.mara[Math.round((24.5*conv)/25)],icon:'url(./water.png)'},
   {name:"Aidstation 19", coordinates:coordinates.mara[Math.round((25.2*conv)/25)],icon:'url(./water.png)'},
-
+*/
 ]
-
-console.log(waypoints)
 
 
   colorScale ={ mara: d3.scaleLinear()
             .domain([0, 75,150])  // Input domain
             .range([ "green","yellow","red"]),
-            
-            maraslow: d3.scaleLinear()
-            .domain([0, 500])  // Input domain
-            .range([ "yellow","black"]),
-            
-            half: d3.scaleLinear()
-            .domain([0, 500])  // Input domain
-            .range([ "blue","black"]),tenkm: d3.scaleLinear()
-            .domain([0, 500])  // Input domain
-            .range([ "green","black"]),fivekm: d3.scaleLinear()
-            .domain([0, 500])  // Input domain
-            .range([ "pink","black"]),
-            
-            twofivekm: d3.scaleLinear()
-            .domain([0, 500])  // Input domain
-            .range([ "#09ebdc","black"])
+          
 
 
   }
@@ -249,28 +232,28 @@ console.log(waypoints)
 
            
 racenames={mara:"marathon",maraslow:"marathon diverted",half:"halfmarathon",tenkm:"10km run",fivekm:"5km run",twofivekm:"2.5km run"}
-           cutoff = {mara:18*60+15,maraslow:8*60+360+60,half:5*60+360+120,tenkm:5*60+360+90,fivekm:3*60+330+360,twofivekm:3*60+360+360}
+           cutoff = {mara:20*60,maraslow:8*60+360+60,half:5*60+360+120,tenkm:5*60+360+90,fivekm:3*60+330+360,twofivekm:3*60+360+360}
 
 
            tim =60*7
-key= "delay"
+key= "delayer"
 const value = localStorage.getItem(key);
 
 // Check if the value exists
-delay={mara:(7*60+30)}
+delay={mara:(9*60+10)}
 if (value !== null) {
 
   delay = JSON.parse(value)
 
 } else {
-    delay={mara:(7*60+30)}
+    delay={mara:(9*60+10)}
     localStorage.setItem(key, JSON.stringify(delay));
 
 
 }
 
 
-tim =60*7
+tim =60*9
 d3.select('#maratimset').property("value",convertMinutesToTime(delay.mara))
 d3.select('#halftimset').property("value",convertMinutesToTime(delay.half))
 d3.select('#tenkmtimset').property("value",convertMinutesToTime(delay.tenkm))
@@ -384,14 +367,14 @@ play = false
                           
                     //    temp = Math.round(Math.max(0,timr-delay.mara)*3.136)
          
-                if (filast[0] != 0 && timr < delay.mara+122) {markers[8].setLngLat(coordinates.mara[filast[0]+1])}else{markers[8].setLngLat([0,0])}
-                        if (filast[1] != 0  ) {markers[9].setLngLat(coordinates.mara[filast[1]-1])}else{markers[9].setLngLat([0,0])}
+                if (filast[0] != 0 && timr < delay.mara+122) {markers[2].setLngLat(coordinates.mara[filast[0]+1])}else{markers[2].setLngLat([0,0])}
+                        if (filast[1] != 0  ) {markers[3].setLngLat(coordinates.mara[filast[1]-1])}else{markers[3].setLngLat([0,0])}
                         
     } 
  // button zum absoielen
                         
                                 setInterval(function (){
-                                    if (tim>1020){play=false}
+                                    if (tim>1200){play=false}
                                     if(play == true){
                                                tim= tim + autoplayspeed;
                                         zeitgewahlt(Math.round(tim) )}
@@ -506,6 +489,7 @@ function initialise_map()  {
       style: 'mapbox://styles/mapbox/streets-v11', // Map style to use
       center: truecenter, // Starting position [lng, lat]
     dragRotate: true,
+    minzoom:15,
       zoom: 12 ,// Starting zoom level
       pitch: 45, // tilt the map 45 degrees
       bearing: 0 // rotate the map -17.6 degrees
@@ -670,13 +654,7 @@ markers =[]
 
 map.on('zoom', function() { d3.select('#gu3').property('value',Math.round(map.getZoom()*10)/10)
 toggleMarkers();
-if(map.getZoom()>13){console.log("wd")}
-/*
-if(map.getZoom() >14){linesize = 8}else{linesize=3}
-for(i=0;i<linienliste.length;i++){
-map.setPaintProperty(linienliste[i].name +"l", 'line-width', linesize);
-}
-*/
+
 })
 map.on('pitch', function() { d3.select('#gu1').property('value',90-Math.round(map.getPitch()))})
 map.on('move', function() { d3.select('#gu2').property('value',Math.round(map.getBearing()))})
@@ -789,14 +767,14 @@ textMarkersData.forEach(data => {
 function toggleMarkers() {
         const zoom = map.getZoom();
         textMarkers.forEach(marker => {
-            if (zoom > 14) {
+            if (zoom > 13) {
                 marker.getElement().style.display = 'block';
             } else {
                 marker.getElement().style.display = 'none';
             }
         });
         markers.forEach(marker => {
-            if (zoom > 13) {
+            if (zoom > 10) {
                 marker.getElement().style.display = 'block';
             } else {
                 marker.getElement().style.display = 'none';
