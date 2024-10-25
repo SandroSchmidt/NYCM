@@ -64,8 +64,8 @@ realtime = false
        d3.select('#gu1').property('value','45')
        d3.select('#gu2').property('value','0')
        d3.select('#gu3').property('value','15')
-       zeitgewahlt(7*60)
-       tim = 7*60
+       zeitgewahlt(9*60)
+       tim = 9*60
        d3.select('#playbut').text('play')
        play = false
            ">reset</button>
@@ -179,7 +179,7 @@ if (coltoggle){
     autoplayspeed = 0.5
 
 truecenter = coordinates.mara[Math.round(coordinates.mara.length/2)]
-
+lastmx=100
   conv = 1609.34 
 waypoints =[
   //9, 15, 20, 25, 30, 36
@@ -312,7 +312,11 @@ play = false
                                         
                                         let kk = Math.max(0,timr-delay[key]) 
                                         kkk =kk
-                                        mx =d3.max(woist[key][kk].slice(1))
+                                        mx =d3.max(woist[key][kk].slice(40))
+                                        mx = (mx+lastmx )/2
+                                        mx = Math.round(mx/20)*20
+
+                                        lastmx = mx
                                         console.log(mx)
   colorScale =d3.scaleLinear()
             .domain([0, mx/2,mx])  // Input domain
